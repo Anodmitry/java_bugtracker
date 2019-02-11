@@ -1,0 +1,43 @@
+﻿CREATE TABLE IF NOT EXISTS `Projects` (
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  `name` varchar(255) NOT NULL);
+
+CREATE TABLE IF NOT EXISTS `Users` (
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  `name` varchar(255) NOT NULL);
+
+CREATE TABLE IF NOT EXISTS `Issues` (
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  `id_project` INTEGER NOT NULL,
+  `id_user` INTEGER NOT NULL,
+  `dicription` varchar(255) NOT NULL,
+  `date` varchar(255) NOT NULL,
+  FOREIGN KEY (`id_project`) REFERENCES Projects(`id`),
+  FOREIGN KEY (`id_user`) REFERENCES Users(`id`)
+  );
+
+INSERT INTO Projects (name)
+VALUES ("p_test")
+
+INSERT INTO Users (name)
+VALUES ("u_test")
+
+INSERT INTO Issues (id_project, id_user, discription, find_date)
+VALUES (2, 2, "sample discription", "18.01.2019")
+
+
+
+--all Issues created for specified (p1) Projects by specified (u1) User
+
+SELECT Issues.discription, Issues.find_date 
+FROM Issues 
+INNER JOIN Projects, Users 
+ON Projects.id = Issues.id_project AND Users.id = Issues.id_user 
+WHERE Projects.name = 'p1' AND Users.name = 'u1'
+
+--can be written in other method
+
+SELECT id AS "Issue", find_date AS "Date when found", discription AS "Discription"
+FROM Issues
+WHERE Issues.id_project = (SELECT id FROM Projects WHERE Projects.name = "p1")
+AND Issues.id_user = (SELECT id FROM Users WHERE Users.name = "u1")

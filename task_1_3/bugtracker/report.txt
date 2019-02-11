@@ -1,0 +1,7 @@
+List of issues found by <User: name_1> in <Project: proj_1>
+1.
+	<ID: 21.01.2019 06:30:02 PM
+	Project: proj_1
+	User: name_1
+	Date: 21.01.2019 06:30:02 PM
+	Discription: test discription 1>
